@@ -1,0 +1,1 @@
+set(BOBBY_APP_NAME default)

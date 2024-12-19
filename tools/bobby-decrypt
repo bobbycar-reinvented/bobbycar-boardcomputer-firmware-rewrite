@@ -1,0 +1,8 @@
+#!/bin/sh
+if test -z ${BOBBY_GPG+y}
+then
+    gpg --quiet --batch --yes --decrypt --passphrase="$GPG_KEY" --output ./ignore.tar.gz ignore.tar.gz.gpg
+else
+    gpg --quiet --batch --yes --decrypt --passphrase="$BOBBY_GPG" --output ./ignore.tar.gz ignore.tar.gz.gpg
+fi
+tar xzf ignore.tar.gz

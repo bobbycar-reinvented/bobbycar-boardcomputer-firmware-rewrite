@@ -1,0 +1,8 @@
+#!/bin/bash
+tar czf ignore.tar.gz ignore
+if test -z ${BOBBY_GPG+y}
+then
+    gpg -c --batch --yes ignore.tar.gz
+else
+    gpg -c --batch --yes --passphrase=$BOBBY_GPG ignore.tar.gz
+fi

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# check if BOBBY_ROOT is set
+if [ -z "$IDF_PATH" ]; then
+    echo "BOBBY_ROOT is not set, sourcing file"
+
+    # check if file export.sh exists
+    if [ -f export.sh ]; then
+        echo "export.sh exists, sourcing file"
+        source export.sh
+    else
+        echo "export.sh does not exist, exiting"
+        exit 1
+    fi
+fi

@@ -1,0 +1,4 @@
+#!/bin/bash
+. "$( dirname "${BASH_SOURCE[0]}" )"/source-if-not-sourced
+
+idf.py -p /dev/ttyUSB0 -b 115200 monitor

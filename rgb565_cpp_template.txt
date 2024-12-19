@@ -1,0 +1,10 @@
+#include "${name}.h"
+
+namespace {namespace} {{
+
+const espgui::Icon<{width}, {height}> {name} {{{{
+    {image_content}
+}}, "{name}"}};
+
+}} // namespace {namespace}
+

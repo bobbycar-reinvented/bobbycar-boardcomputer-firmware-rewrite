@@ -1,0 +1,4 @@
+#!/bin/bash
+. "$( dirname "${BASH_SOURCE[0]}" )"/source-if-not-sourced
+
+espcoredump.py -p /dev/ttyUSB0 dbg_corefile ./build/bobbyquad_*.elf

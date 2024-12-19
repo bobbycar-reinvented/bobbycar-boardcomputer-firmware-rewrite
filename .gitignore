@@ -1,0 +1,26 @@
+# windows
+desktop.ini
+
+# build files
+build
+build/
+build_*/
+
+# cmake
+CMakeLists.txt.user*
+cmake-build-debug
+
+# config files
+/config.cmake
+/sdkconfig
+/sdkconfig.old*
+
+# ccache
+.ccache
+
+# vscode
+.vscode/
+
+# esp-idf
+managed_components/
+

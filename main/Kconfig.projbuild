@@ -1,0 +1,167 @@
+menu "Bobbycar Boardcomputer"
+
+config BOBBYCAR_PROFILE_NUM
+    int "Amount of available profiles"
+    help
+        The amount of profiles that can be stored on the boardcomputer.
+        The profiles are used to store driving-mode settings.
+    default 4
+    range 1 8
+
+config BOBBYCAR_DEFAULT_PROFILE
+    int "Default profile"
+    help
+        The profile that is used as default when the boardcomputer is started.
+    default 0
+    range 0 7
+
+menu "Profile settings"
+
+config BOBBYCAR_DEFAULTS_IMOTMAX
+    int "Default maximum motor current (A)"
+    help
+        The default maximum motor current in Ampere.
+    default 28
+
+config BOBBYCAR_DEFAULTS_IDCMAX
+    int "Default maximum DC current (A)"
+    help
+        The default maximum drive current in Ampere.
+    default 30
+
+config BOBBYCAR_DEFAULTS_NMOTMAX
+    int "Default maximum motor speed (RPM)"
+    help
+        The default maximum motor speed in RPM.
+    default 2000
+
+config BOBBYCAR_DEFAULTS_FIELDWEAKMAX
+    int "Default maximum field weakening (A)"
+    help
+        The default maximum field weakening in Ampere.
+    default 17
+
+config BOBBYCAR_DEFAULTS_FIELDADVMAX
+    int "Default maximum field advance (°)"
+    help
+        The default maximum field advance in degrees.
+    default 40
+
+config BOBBYCAR_DEFAULTS_INVERTBACKLEFT
+    bool "Invert back left motor"
+    help
+        Invert the direction of the back left motor.
+    default n
+
+config BOBBYCAR_DEFAULTS_INVERTBACKRIGHT
+    bool "Invert back right motor"
+    help
+        Invert the direction of the back right motor.
+    default y
+
+config BOBBYCAR_DEFAULTS_INVERTFRONTLEFT
+    bool "Invert front left motor"
+    help
+        Invert the direction of the front left motor.
+    default n
+
+config BOBBYCAR_DEFAULTS_INVERTFRONTRIGHT
+    bool "Invert front right motor"
+    help
+        Invert the direction of the front right motor.
+    default y
+
+endmenu # Profile settings
+
+menu "Motors & Controllers"
+
+config BOBBYCAR_DEFAULTS_WHEELDIAMETER
+    int "Default wheel diameter (mm)"
+    help
+        The default wheel diameter in mm. Defaults to 10 inch wheels.
+    default 254
+
+config BOBBYCAR_DEFAULTS_NUM_MAGNETIC_POLES
+    int "Default number of magnetic poles"
+    help
+        The number of magnetic poles of the motors.
+    default 15
+    range 1 100
+
+config BOBBYCAR_DEFAULTS_SWAP_FRONT_BACK
+    bool "Swap front and back motors"
+    help
+        Swap the front and back motors.
+    default n
+
+# make a choice if CAN or UART
+choice BOBBYCAR_COMMUNICATION_PROTOCOL
+    bool "Communication protocol"
+    default BOBBYCAR_COMMUNICATION_PROTOCOL_CAN
+
+    config BOBBYCAR_COMMUNICATION_PROTOCOL_CAN
+        bool
+        prompt "CAN"
+    config BOBBYCAR_COMMUNICATION_PROTOCOL_UART
+        bool
+        prompt "UART"
+endchoice
+
+
+endmenu # Motors & Controllers
+
+menu "CAN settings"
+
+depends on BOBBYCAR_COMMUNICATION_PROTOCOL_CAN
+
+config BOBBYCAR_CAN_CONTROLLER_VALID_TIMEOUT_MS
+    int "CAN controller values valid timeout (ms)"
+    help
+        The timeout in milliseconds for the CAN bus.
+    default 200
+    range 1 1000
+
+config BOBBYCAR_DEFAULTS_CAN_RECEIVE_TIMEOUT_MS
+    int "CAN receive timeout (ms)"
+    help
+        The timeout in milliseconds for receiving CAN messages.
+    default 100
+    range 1 1000
+
+config BOBBYCAR_DEFAULTS_CAN_SEND_TIMEOUT_MS
+    int "CAN send timeout (ms)"
+    help
+        The timeout in milliseconds for sending CAN messages.
+    default 0
+    range 0 1000
+
+config BOBBYCAR_DEFAULTS_CAN_RESET_ON_ERROR
+    bool "Reset CAN driver on error"
+    help
+        Reset the CAN driver on error. This can be useful if the CAN driver is not working properly.
+    default n
+
+config BOBBYCAR_DEFAULTS_CAN_UNINSTALL_ON_RESET
+    bool "Uninstall/Reinstall CAN driver on reset"
+    help
+        Uninstall and reinstall the CAN driver on reset. This can be useful if the CAN driver is not working properly.
+    default n
+
+config BOBBYCAR_CAN_CONTROLLER_MAX_ERROR_COUNT
+    int "CAN controller max error count"
+    help
+        The maximum error count for the CAN controller.
+    default 3
+    range 1 100
+
+
+config BOBBYCAR_CAN_UPDATE_INTERVAL_MS
+    int "CAN task update interval (ms)"
+    help
+        The interval in milliseconds for updating the CAN bus.
+    default 8
+    range 1 1000
+
+endmenu # CAN settings
+
+endmenu # Bobbycar Boardcomputer
